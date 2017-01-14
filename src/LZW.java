@@ -1,12 +1,5 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.function.Supplier;
 
 /**
  * Created by snuker on 14.01.17.
@@ -75,6 +68,11 @@ class DLEReader{
     }
 }
 class LZWTable extends ArrayList{
+    public boolean add(Object o){
+        if (size()>=DLEWriter.MAX_CODE)
+            return false;
+        return super.add(o);
+    }
     public LZWTable(){
         super();
     }
