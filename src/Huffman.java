@@ -30,7 +30,10 @@ class bitBuffReader{
         int res= (curr>>pos)&1;
         pos++;
         if (pos>7){
-            curr=l.get(0);
+
+                curr = l.get(0);
+
+
             l.remove(0);
             pos=0;
         }
@@ -46,7 +49,7 @@ class bitBuffReader{
         return res;
     }
     public boolean end(){
-        return pos==7 && l.size()==0;
+        return pos>7 && l.size()==0;
     }
     public String getBitRepr(){
         StringBuilder s=new StringBuilder();
@@ -168,7 +171,12 @@ class HuffTreeNode extends HuffTree {
 
 public class Huffman {
 
-
+    public static HuffTree builTree(byte[] src){
+        int[] freq=new int[256];
+        for (byte b:src)
+            freq[unsignedToBytes(b)]++;
+        return buildTree(freq);
+    }
     public static HuffTree buildTree(int freqs[] ){
         PriorityQueue<HuffTree> pq = new PriorityQueue<HuffTree>();
         HuffTree top;
@@ -276,8 +284,21 @@ public class Huffman {
         ArrayList<Byte> res=new ArrayList<>();
         while (!b.end()&&total_len!=0){
             HuffTree t=root;
+
             while (!(t instanceof HuffTreeLeaf)){
-                int x=b.getBit();
+                int x=1;
+                    try {
+                        x = b.getBit();
+                    }
+                    catch (
+                            Exception e
+                            ){
+                        for (byte q:res){
+                           // System.out.println(Integer.toHexString((int)q));
+                        }
+                    }
+
+
                 if (x==1){
                     t= ((HuffTreeNode)t).right;
 
