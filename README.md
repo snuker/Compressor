@@ -12,3 +12,4 @@ To test: compress.java -c filename (to compress) and compress.java -x filename (
 - LZW 37%
 - LZ77+Huffman 42%
 - LZW+Huffman 49.5%
+- MTF+Huffman 39%
